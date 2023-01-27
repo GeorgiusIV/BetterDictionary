@@ -1,4 +1,4 @@
-
+class Words:
     def __init__(self):
         self.contents = list()
         # TODO: self.contents = read in the whole file to a list
