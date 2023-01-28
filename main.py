@@ -1,6 +1,8 @@
+from random import randint
+
 class Words:
-    def __init__(self):
-        self.contents = list()
+    def __init__(self, contents):
+        self.contents = contents
         # TODO: self.contents = read in the whole file to a list
         
     def __repr__(self):
@@ -10,6 +12,8 @@ class Words:
         return str(self.contents)
     
     def ofLength(self, rule):
+        
+        newContents = self.contents
         
         try: 
             length = int(rule)
@@ -22,13 +26,23 @@ class Words:
             # TODO: determine the length of the number and the length of the condition submitted by the user
             # TODO: modify self.contents to follow the rule [condition] [num]
             
-        return self
+        return Words(newContents)
     
     def asPhonemes(self):
         
-        #TODO: modify self.contents such that all words composed of letters are replaced with their phoneme counterparts
+        newContents = self.contents
         
-        return self
+        #TODO: modify newContents such that all words composed of letters are replaced with their phoneme counterparts
+        
+        return Words(newContents)
+    
+    def takeSample(self, size):
+        
+        length = len(self.contents)
+        sample = [self.contents[randint(0,length)] for i in range(size)]
+        
+        return Words(sample)
+    
     
 words = Words()
 words.asPhonemes().ofLength(3)
