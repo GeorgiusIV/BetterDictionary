@@ -1,16 +1,32 @@
 from random import randint
 
 class Words:
-    def __init__(self, contents):
+    def __init__(self, contents = None):
+
         self.contents = contents
-        # TODO: self.contents = read in the whole file to a list
+
+        # if no contents are specified, use the default dictionary 
+        if contents is None:
+            with open('DICTIONARY.txt', 'r', encoding='utf-8') as f: # split words by t/ and remove /n
+                self.contents = [l.replace('\n','').split('\t') for l in f.readlines()]
+
+
         
     def __repr__(self):
         
         # TODO: format self.contents more appropriately
         
         return str(self.contents)
+
+
+
+    def __len__(self):
+
+         return len(self.contents)
+
     
+
+
     def ofLength(self, rule):
         
         newContents = self.contents
@@ -27,6 +43,8 @@ class Words:
             # TODO: modify self.contents to follow the rule [condition] [num]
             
         return Words(newContents)
+
+
     
     def asPhonemes(self):
         
@@ -35,15 +53,18 @@ class Words:
         #TODO: modify newContents such that all words composed of letters are replaced with their phoneme counterparts
         
         return Words(newContents)
+
+
     
     def takeSample(self, size):
         
         length = len(self.contents)
-        sample = [self.contents[randint(0,length)] for i in range(size)]
+        sample = [self.contents[randint(0,length)] for _ in range(0,size)]
         
         return Words(sample)
     
     
-words = Words()
-words.asPhonemes().ofLength(3)
+if __name__ == "__main__":
+    words = Words()
+    words.asPhonemes().ofLength(3)
             
