@@ -24,23 +24,46 @@ class Words:
 
          return len(self.contents)
 
-    
 
 
-    def ofLength(self, rule):
+    def ofLength(self, length, rule = '=='):
         
-        newContents = self.contents
+        newContents = list()
+
+        # the input of length must be an integer
+        # the input of rule must be a string that can be evaluated to a logical operator
+
+        # so first I want to verify the inputs
+        # then once the inputs are verified, select a path to follow by the rule provided
+        # then once the path is selected, use the length to filter the words appropriately
         
-        try: 
-            length = int(rule)
-            self.contents = []
-            # TODO: modify self.contents to follow the rule that the length must equal exactly [num]
-            
-        except:
-            condition = str(rule)
-            operand, length = condition[0:-lengthofNum], condition[-lengthofNum]
-            # TODO: determine the length of the number and the length of the condition submitted by the user
-            # TODO: modify self.contents to follow the rule [condition] [num]
+        # TODO: verify the inputs 'length' and 'rule'
+
+        rule = str(rule)
+        for word in self.contents:
+
+            if rule == '<': 
+                if len(word) < length: 
+                    newContents += [word]
+
+            elif rule == '<=':
+                if len(word) <= length: 
+                    newContents += [word]
+
+            elif rule == '==': 
+                if len(word) == length: 
+                    newContents += [word]
+
+            elif rule == '>=':
+                if len(word) >= length: 
+                    newContents += [word]
+
+            elif rule == '>':
+                if len(word) > length: 
+                    newContents += [word]
+
+            else: 
+                print("Rule is unrecognized")
             
         return Words(newContents)
 
