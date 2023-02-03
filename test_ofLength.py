@@ -6,7 +6,7 @@ import main
 
 
 class main_tests(unittest.TestCase):
-  def test_ofLength3_HasReasonableCountOfWords(self):
+  def test_ofLength3_hasReasonableCountOfWords(self):
     
     MOST3LETTERWORDS = 1065 # SCRABBLEDICT_VOL6
     
@@ -15,34 +15,46 @@ class main_tests(unittest.TestCase):
     self.assertLessEqual(len(W.ofLength(3)), MOST3LETTERWORDS)
     self.assertGreaterEqual(len(W.ofLength(3)), 0)
 
+
     
-  def test_ofLength3_DefaultArgumentWorks(self):
+  def test_ofLength3_defaultArgumentWorks(self):
 
     W = main.Words()
 
     # test the default argument returns the same as the argument "=="
-    self.assertListEqual(W.ofLength(3), W.ofLength(3, rule="=="))
+    self.assertListEqual(W.ofLength(3).contents, W.ofLength(3, rule="==").contents)
 
 
-  def test_takeSampleofLength3_LessEquals(self):
 
-    # given a sample S
-    W = main.Words()
+  def test_ofLengthL_allAreLengthL_4xTests(self):
 
-    S1 = W.takeSample(10).ofLength(3)
-    S2 = W.ofLength(3).takeSample(10) #which would typically be fixed
-    # are all word contained in S, ofLength 3
+    # test every word in the dictionary returned by ofLength, is of the stated length
+    # using WHATIFs/HOWDOs/TODOs as comments
 
+    # WHATIF: W.contents is empty
+    # HOWDO:  I get print(AllTrue) to return the list in the Debug View
+    r = '=='
+    for l in [1,3,5,7]:
+        W = main.Words()
+        W.ofLength(l, r)
+        AllTrue = all([True if len(word) == l  else False for word in W.contents]) # THIS TEST FAILS
+        self.assertTrue(AllTrue)
 
-    self.assertRaises(W.ofLength(), Exception)
-
-  def test_takeSampleofLength3_LessThan(self):
+  def test_ofLength5_followsEachRule_5xTests(self):
     
-    self.assertRaises(W.ofLength(), Exception)
+    l = 5
+    for r in ['>=','>','==','<','<=']:
+        W = main.Words()
+        W.ofLength(l, r)
 
-  def test_takeSampleofLength3_EqualTo(self):
-    
-    self.assertRaises(W.ofLength(), Exception)
+        if r == '>=': AllTrue = all([True if len(word) >= l else False for word in W.contents])
+        elif r == '>': AllTrue = all([True if len(word) > l else False for word in W.contents])
+        elif r == '==': AllTrue = all([True if len(word) == l else False for word in W.contents])
+        elif r == '<': AllTrue = all([True if len(word) < l else False for word in W.contents])
+        elif r == '<=': AllTrue = all([True if len(word) <= l else False for word in W.contents])
+        else: pass
+
+        self.assertTrue(AllTrue)
 
   def test_takeSampleofLength3_GreaterThan(self):
     
