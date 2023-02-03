@@ -40,6 +40,8 @@ class main_tests(unittest.TestCase):
         AllTrue = all([True if len(word) == l  else False for word in W.contents]) # THIS TEST FAILS
         self.assertTrue(AllTrue)
 
+ 
+
   def test_ofLength5_followsEachRule_5xTests(self):
     
     l = 5
@@ -56,25 +58,17 @@ class main_tests(unittest.TestCase):
 
         self.assertTrue(AllTrue)
 
-  def test_takeSampleofLength3_GreaterThan(self):
-    
-    self.assertRaises(W.ofLength(), Exception)
-
-  def test_takeSampleofLength3_GreaterEquals(self):
-    
-    self.assertRaises(W.ofLength(), Exception)
 
 
-    
   def test_ofLength3_IsInSourceDict(self):
 
     # take a sample of W following the 'ofLength' rule
     W = main.Words()
     S = W.ofLength(3)
 
-    # check each word in the sample is contained in W
-    for s in S.contents:
-        self.assertIn(s, W.contents)
+    # return a truth value per word in S.contents, then perform an AND-GATE on them all.
+    AllIn = all([True if s in W.contents else False for s in S.contents])
+    self.assertTrue(AllIn)
 
 
 if __name__ == "__main__":

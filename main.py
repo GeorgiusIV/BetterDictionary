@@ -38,6 +38,7 @@ class Words:
         # then once the path is selected, use the length to filter the words appropriately
         
         # TODO: verify the inputs 'length' and 'rule'
+        # TODO: self.contents is an object of form list[list[str]] though it is being accessed as if it were list[str], please alter the code as necessary.
 
         rule = str(rule)
         for word in self.contents:
